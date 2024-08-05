@@ -25,20 +25,19 @@ const App = () => {
   };
 
   const handleFilterChange = (newFilter) => {
-    const updatedFilters = [...filters.filter(f => f.column !== newFilter.column), newFilter]
+    const updatedFilters = [...filters.filter(f => f.column !== newFilter.column), newFilter];
     setFilters(updatedFilters);
     applyFilters(updatedFilters);
   };
-
   const applyFilters = (currentFilters) => {
     const filtered = employees.filter(row => {
       return currentFilters.every(filter => {
         const value = row[filter.column];
         switch (filter.type) {
           case 'equals':
-            return value == filter.value;
+            return value ===   filter.value;
           case 'notEqual':
-            return value != filter.value;
+            return value !== filter.value;
           case 'contains':
             return String(value).includes(filter.value);
           case 'notContains':
